@@ -1,0 +1,21 @@
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+spring:
+  cloud:
+    config:   # it will not over ride the properties of main system since config in this file will be applied for all .yml here
+      override-system-properties: false
+
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+  endpoints:
+    web:
+      exposure:
+        include: refresh
