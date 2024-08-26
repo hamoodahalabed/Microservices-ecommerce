@@ -22,7 +22,7 @@ spring:
         spring.json.type.mapping: orderConfirmation:com.mohammad.ecommerce.kafka.OrderConfirmation
 
 application:
-  config:             #8222 is the port of api gateway for load balancing
+  config:             #8222 is the port of api gateway
 #    customer-url: http://localhost:8222/api/v1/customers
 #    payment-url: http://localhost:8222/api/v1/payments
     product-url: http://product-service/api/v1/products
