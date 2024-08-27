@@ -1,1 +1,1 @@
-# e-commerce mico-service 
+# e-commerce micro-service 
