@@ -1,0 +1,42 @@
+spring:
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring.json.type.mapping: orderConfirmation:com.mohammad.camunda.kafka.OrderConfirmation
+
+  datasource:
+    url: jdbc:postgresql://localhost:5433/camunda
+    username: mohammad
+    password: mohammad
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+camunda:
+  bpm:
+    client:
+      baseUrl: http://localhost:8080/engine-rest
+    database:
+      type: postgres
+      schema-update: true
+    admin-user:
+      id: demo
+      password: demo
+zeebe:
+  client:
+    worker:
+      threads: 5
+
+
+#logging:
+#  level:
+#    root: ERROR          # Set root log level to ERROR to reduce log verbosity
+#    org:
+#      apache:
+#        kafka: WARN

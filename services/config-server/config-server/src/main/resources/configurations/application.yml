@@ -5,17 +5,50 @@ eureka:
     service-url:
       defaultZone: http://localhost:8761/eureka
 
-spring:
+#spring:
+#  sleuth:
+#    sampler:
+#      probability: 1.0
+
   cloud:
     config:   # it will not over ride the properties of main system since config in this file will be applied for all .yml here
       override-system-properties: false
 
 
+
+
 management:
+
   tracing:
     sampling:
       probability: 1.0
+
+
   endpoints:
     web:
       exposure:
-        include: refresh
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always
+    info:
+      enabled: true
+    metrics:
+      enabled: true
+
+#feign:
+#  client:
+#    config:
+#      default:
+#        loggerLevel: full
+#        retryer: neverRetry
+
+
+
+feign:
+  client:
+    config:
+      default:
+        loggerLevel: none
+
+

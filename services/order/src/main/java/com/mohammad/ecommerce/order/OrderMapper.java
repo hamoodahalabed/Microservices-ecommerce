@@ -27,4 +27,18 @@ public class OrderMapper {
                 order.getCustomerId()
         );
     }
+
+    public Order toOrder(OrderDTO orderDTO) {
+
+        if (orderDTO == null) {
+            return null;
+        }
+        return Order.builder()
+                .id(orderDTO.id())
+                .reference(orderDTO.reference())
+                .paymentMethod(orderDTO.paymentMethod())
+                .customerId(orderDTO.customerId())
+                .totalAmount(orderDTO.amount())
+                .build();
+    }
 }

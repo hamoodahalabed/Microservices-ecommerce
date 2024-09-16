@@ -37,4 +37,10 @@ public class OrderController {
     ) {
         return ResponseEntity.ok(this.service.findById(orderId));
     }
+
+
+    @PostMapping("/save")
+    public ResponseEntity<Integer> SaveOrder(@RequestBody OrderDTO orderRequest) {
+       return ResponseEntity.ok(service.saveOrder(orderRequest));
+    }
 }

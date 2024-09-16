@@ -39,10 +39,9 @@ public class EmailService {
 
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED, UTF_8.name());
-        messageHelper.setFrom("mohammadalabed@gmail.com");
+        messageHelper.setFrom("contact@mohammad.com");
 
-       final String templateName = PAYMENT_CONFIRMATION.getTemplate();
-
+        final String templateName = PAYMENT_CONFIRMATION.getTemplate();
 
         Map<String, Object> variables = new HashMap<>();
         variables.put("customerName", customerName);
@@ -77,7 +76,7 @@ public class EmailService {
 
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED, UTF_8.name());
-        messageHelper.setFrom("mohammadalabed@gmail.com");
+        messageHelper.setFrom("contact@mohammad.com");
 
         final String templateName = ORDER_CONFIRMATION.getTemplate();
 

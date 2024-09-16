@@ -94,4 +94,10 @@ public class OrderService {
                 .map(this.mapper::fromOrder)
                 .orElseThrow(() -> new EntityNotFoundException(String.format("No order found with the provided ID: %d", id)));
     }
+
+    public Integer saveOrder(OrderDTO orderRequest) {
+        var orderReq = repository.save(mapper.toOrder(orderRequest));
+
+        return orderReq.getId();
+    }
 }

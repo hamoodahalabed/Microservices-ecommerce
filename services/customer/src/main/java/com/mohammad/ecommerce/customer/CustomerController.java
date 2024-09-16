@@ -1,5 +1,7 @@
 package com.mohammad.ecommerce.customer;
 
+import com.mohammad.ecommerce.APIResponse.ApiResponse;
+import com.mohammad.ecommerce.APIResponse.ApiResponseObj;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,42 +20,73 @@ public class CustomerController {
     private int serverPort;
 
     @PostMapping
-    public ResponseEntity<String> createCustomer (
+    public ResponseEntity<ApiResponse<String>> createCustomer (
             @RequestBody @Valid CustomerRequest customerRequest
     ) {
         System.out.println("server port + " + serverPort);
-        return ResponseEntity.ok(customerService.createCustomer(customerRequest));
+        String data = customerService.createCustomer(customerRequest);
+        return ResponseEntity.ok(new ApiResponse<>(201,"Added successfully", data));
     }
 
     @PutMapping
-    public ResponseEntity<Void> updateCustomer(
+    public ResponseEntity<ApiResponse<String>> updateCustomer(
             @RequestBody @Valid CustomerRequest customerRequest
     ) {
-        customerService.updateCustomer(customerRequest);
+        String data = customerService.updateCustomer(customerRequest);
 
-        return ResponseEntity.accepted().build();
+        return ResponseEntity.accepted().body(new ApiResponse<String>(201, "Updated successfully", data));
     }
 
     @GetMapping
-    public ResponseEntity<List<CustomerResponse>> FindAll() {
-        return ResponseEntity.ok(customerService.findAllCustomer());
+    public ResponseEntity<ApiResponse<List<CustomerResponse>>> FindAll() {
+        var data = customerService.findAllCustomer();
+        ApiResponse<List<CustomerResponse>> response = new ApiResponse<List<CustomerResponse>> (200,"The data found", data);
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/exist/{customer-id}")
-    public ResponseEntity<Boolean> existById (@PathVariable("customer-id") String customerId) {
-        return ResponseEntity.ok(customerService.existById(customerId));
+    public ResponseEntity<ApiResponse<Boolean>> existById (@PathVariable("customer-id") String customerId) {
+
+       Boolean Data = customerService.existById(customerId);
+       ApiResponse<Boolean> response = new ApiResponse<>(200,"founded", Data);
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/{customer-id}")
-    public ResponseEntity<CustomerResponse> findById (@PathVariable("customer-id") String customerId) {
-        return ResponseEntity.ok(customerService.findById(customerId));
+    public  ApiResponse<CustomerResponse>  findById (@PathVariable("customer-id") String customerId) {
+        var data =  customerService.findById(customerId);
+
+        ApiResponse<CustomerResponse> response = new ApiResponse<CustomerResponse> (200,"The data found", data);
+        return response;
     }
 
     @DeleteMapping("/{customer-id}")
-    public ResponseEntity<Void> delete (
+    public ResponseEntity<ApiResponse<String>> delete (
             @PathVariable("customer-id") String customerId
     ) {
         customerService.deleteCustomer(customerId);
-        return ResponseEntity.accepted().build();
+        return ResponseEntity.accepted().body(new ApiResponse<String>(200, "Deleted successfully", customerId));
     }
+
+//    @GetMapping("/structure/{customer-id}")
+//    public ResponseEntity<ApiResponse<CustomerResponse>> findByIdStructured (@PathVariable("customer-id") String customerId) {
+//
+//       var data =  customerService.findById(customerId);
+//
+//        ApiResponse<CustomerResponse> response = new ApiResponse<CustomerResponse> ("accept","the data found", data);
+//
+//        return ResponseEntity.ok(response);
+//
+//    }
+
+    @GetMapping("/structure/{customer-id}")
+    public ResponseEntity<ApiResponse<CustomerResponse>> findByIdStructured (@PathVariable("customer-id") String customerId) {
+
+        var data =  customerService.findById(customerId);
+
+        ApiResponse<CustomerResponse> response = new ApiResponse<CustomerResponse> (200,"The data found", data);
+        return ResponseEntity.ok(response);
+
+    }
+
 }

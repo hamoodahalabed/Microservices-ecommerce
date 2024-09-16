@@ -10,23 +10,23 @@ spring:
         - id: customer-service
           uri: lb:http://CUSTOMER-SERVICE
           predicates:
-            - Path=/api/v1/customers
-            - Method=POST
+            - Path=/api/v1/customers/**
+#            - Method=POST
         - id: order-service
           uri: lb:http://ORDER-SERVICE
           predicates:
-            - Path=/api/v1/orders
-            - Method=POST
-#        - id: order-lines-service
-#          uri: lb:http://ORDER-SERVICE
-#          predicates:
-#            - Path=/api/v1/order-lines/**
+            - Path=/api/v1/orders/**
+#            - Method=POST
+        - id: order-lines-service
+          uri: lb:http://ORDER-SERVICE
+          predicates:
+            - Path=/api/v1/order-lines/**
         - id: product-service
           uri: lb:http://PRODUCT-SERVICE
           predicates:
-            - Path=/api/v1/products
-            - Method=GET
-#        - id: payment-service
-#          uri: lb:http://PAYMENT-SERVICE
-#          predicates:
-#            - Path=/api/v1/payments/**
+            - Path=/api/v1/products/**
+#            - Method=GET
+        - id: payment-service
+          uri: lb:http://PAYMENT-SERVICE
+          predicates:
+            - Path=/api/v1/payments/**

@@ -21,17 +21,17 @@ public class CustomerService {
         return customer.getId();
     }
 
-    public void updateCustomer(CustomerRequest customerRequest) {
+    public String updateCustomer(CustomerRequest customerRequest) {
 
         var customer = customerRepository.findById(customerRequest.id())
                 .orElseThrow(() -> new CustomerNotFoundException(
                         String.format("Cannot update customer:: No customer founded with provided ID:: %s ", customerRequest.id())
                 ));
         mergerCustomer(customer,customerRequest);
-        customerRepository.save(customer);
+        return customerRepository.save(customer).getId();
     }
 
-    private void mergerCustomer(Customer customer, CustomerRequest customerRequest) {
+    public void mergerCustomer(Customer customer, CustomerRequest customerRequest) {
         if(StringUtils.isNotBlank(customerRequest.firstName())) {
             customer.setFirstName(customerRequest.firstName());
         }
@@ -64,10 +64,12 @@ public class CustomerService {
                 .orElseThrow(() -> new CustomerNotFoundException(String.format("No customer found with ID:: %s " , customerId)));
     }
 
-    public void deleteCustomer(String customerId) {
+    public String deleteCustomer(String customerId) {
 
         var customer = customerRepository.findById(customerId)
                         .orElseThrow(() -> new CustomerNotFoundException("No customer found with ID:: %s " + customerId));
         customerRepository.deleteById(customerId);
+
+        return customer.getId();
     }
 }

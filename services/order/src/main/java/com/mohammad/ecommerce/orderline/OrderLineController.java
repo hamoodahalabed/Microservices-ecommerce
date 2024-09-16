@@ -2,10 +2,7 @@ package com.mohammad.ecommerce.orderline;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,6 +12,7 @@ import java.util.List;
 public class OrderLineController {
 
     private final OrderLineService service;
+    private final OrderLineService orderLineService;
 
     @GetMapping("/order/{order-id}")
     public ResponseEntity<List<OrderLineResponse>> findByOrderId(
@@ -22,4 +20,11 @@ public class OrderLineController {
     ) {
         return ResponseEntity.ok(service.findAllByOrderId(orderId));
     }
+
+    @PostMapping
+    ResponseEntity<Integer> saveOrder (@RequestBody OrderLineRequest request) {
+
+        return ResponseEntity.ok(orderLineService.saveOrderLine(request));
+    }
+
 }
