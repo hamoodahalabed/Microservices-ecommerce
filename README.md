@@ -17,10 +17,6 @@ This project is a distributed microservice-based e-commerce system developed usi
    - [Payment Service](#payment-service)
    - [Product Service](#product-service)
 3. [Technologies Used](#technologies-used)
-4. [Prerequisites](#prerequisites)
-5. [How to Run](#how-to-run)
-6. [Tracing and Monitoring](#tracing-and-monitoring)
-7. [Future Improvements](#future-improvements)
 
 ---
 
