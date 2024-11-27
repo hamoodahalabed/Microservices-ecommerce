@@ -48,7 +48,6 @@ The services are registered in the **Eureka Discovery Server** and managed centr
 ### API Gateway
 - A single entry point for all APIs.
 - Routes requests to the appropriate service.
-- Implements security and rate limiting.
 
 ### Notification Service
 - Listens to **Kafka** events and sends notifications.
@@ -61,8 +60,8 @@ The services are registered in the **Eureka Discovery Server** and managed centr
 - Stores data in **PostgreSQL**.
 
 ### Payment Service
-- Processes payments for orders.
-- Publishes events to **Kafka** for asynchronous communication.
+- Publishes events to **Kafka** for asynchronous communication and payment email.
+- Not integrated with payment provider yet its only send email with order payment details to the user.
 
 ### Product Service
 - Manages product inventory and details.
